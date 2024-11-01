@@ -63,5 +63,5 @@ group :test do
 end
 
 gem "tailwindcss-rails", "~> 3.0"
-
 gem "faker", "~> 3.5"
+gem "devise", "~> 4.9"
