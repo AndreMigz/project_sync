@@ -1,0 +1,16 @@
+{
+  "name": "app",
+  "private": true,
+  "devDependencies": {
+    "daisyui": "^4.12.14",
+    "esbuild": "^0.24.0"
+  },
+  "scripts": {
+    "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets"
+  },
+  "dependencies": {
+    "@hotwired/stimulus": "^3.2.2",
+    "@hotwired/turbo-rails": "^8.0.12",
+    "postcss": "^8.4.47"
+  }
+}
