@@ -4,10 +4,18 @@
 
 @layer components {
   .main-container {
-    @apply w-full h-full overflow-y-auto;
+    @apply w-full h-full p-5 overflow-y-auto;
   }
 
   .menu-option {
     @apply w-full flex items-center justify-start gap-2 px-2 py-3 text-sm rounded-r-lg hover:border-l-2 hover:border-primary hover:bg-neutral;
+  }
+
+  .notice {
+    @apply absolute text-sm right-10 bottom-10 px-3 py-2 bg-slate-300 bg-opacity-15 flex items-center h-14 w-60 max-w-max border-r-4 border-primary rounded-l-lg;
+  }
+
+  .alert {
+    @apply absolute text-sm right-10 bottom-10 px-3 py-2 bg-slate-300 bg-opacity-15 flex items-center h-20 w-80 max-w-max border-r-4 border-red-500 rounded-l-lg;
   }
 }

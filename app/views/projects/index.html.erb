@@ -1,0 +1,31 @@
+<div class="main-container">
+  <div class="flex items-center justify-between">
+    <h1 class="text-xl font-bold">Projects 📂</h1>
+    <!-- You can open the modal using ID.showModal() method -->
+    <button class="btn" onclick="formModal.showModal()">Add Project</button>
+    <%= render partial: "form_modal", locals: { project: Project.new } %>
+  </div>
+  <div class="overflow-x-auto mt-10">
+    <table class="table">
+      <!-- head -->
+      <thead>
+        <tr>
+          <th>
+            <label>
+              <input type="checkbox" class="checkbox" />
+            </label>
+          </th>
+          <th>Name</th>
+          <th>Cliet</th>
+          <th>Description</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @projects.each do | project | %>
+          <%= render partial: "project_row", locals: { project: project }%>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<dialog id="formModal<%= project.id %>" class="modal">
+  <div class="modal-box">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    </form>
+    <h3 class="text-lg font-bold">New Project</h3>
+    <%= form_with(model: project, class: "w-full mt-5") do |f| %>
+      <div class="field w-full px-0 mt-2">
+        <%= f.label :name, class: "mb-4" %><br/>
+        <%= f.text_field :name, class: "input text-sm h-11 input-bordered w-full", autofocus: true, autocomplete: "name", placeholder: "Client's project name" , required: true%>
+      </div>
+      <div class="field w-full px-0 mt-2">
+        <%= f.label :client, class: "mb-4" %><br/>
+        <%= f.text_field :client, class: "input text-sm h-11 input-bordered w-full", autofocus: true, autocomplete: "name", placeholder: "Client's name", required: true %>
+      </div>
+      <div class="field w-full px-0 mt-2">
+        <%= f.label :description, class: "mb-4" %><br/>
+        <%= f.textarea :description, class: "textarea textarea-bordered h-24 w-full", placeholder: "Enter desription", required: true%>
+      </div>
+      <div class="action text-sm mt-2">
+        <%= f.submit "Save", class: "btn btn-primary float-right" %>
+      </div>
+    <% end %>
+  </div>
+</dialog>
