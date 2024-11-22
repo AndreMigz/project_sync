@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   root "dashboard#index"
 
   resources :projects
+  resources :time_logs, path: "logs"
 end
