@@ -14,6 +14,10 @@
         <%= f.text_field :client, class: "input text-sm h-11 input-bordered w-full", autofocus: true, autocomplete: "name", placeholder: "Client's name", required: true %>
       </div>
       <div class="field w-full px-0 mt-2">
+        <%= f.label :logo, class: "mb-4" %><br/>
+        <%= f.file_field :logo, class: "file-input w-full max-w-xs" %>
+      </div>
+      <div class="field w-full px-0 mt-2">
         <%= f.label :description, class: "mb-4" %><br/>
         <%= f.textarea :description, class: "textarea textarea-bordered h-24 w-full", placeholder: "Enter desription", required: true%>
       </div>
