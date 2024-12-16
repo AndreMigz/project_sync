@@ -11,7 +11,7 @@ class ProjectsController < ApplicationController
     if project.save
       redirect_to projects_path, notice: "Project added."
     else
-      redirect_to projects_path, alert: "Pailed to add project. Try again."
+      redirect_to projects_path, alert: "Failed to add project. Try again."
     end
   end
 
@@ -19,7 +19,7 @@ class ProjectsController < ApplicationController
     if @project.update(project_params)
       redirect_to projects_path, notice: "Project updated."
     else
-      redirect_to projects_path, alert: "Pailed to update project. Try again."
+      redirect_to projects_path, alert: "Failed to update project. Try again."
     end
   end
 
