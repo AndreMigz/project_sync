@@ -1,2 +1,0 @@
-class TimeLogsController < ApplicationController
-end

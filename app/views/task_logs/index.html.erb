@@ -1,0 +1,16 @@
+<div class="main-container">
+  <div class="flex items-center justify-between mb-10">
+    <h1 class="text-xl font-bold">Task Logs ⏱️</h1>
+  </div>
+  <% if @active_task.present? %>
+    <%= render partial: 'active_task', locals: {task: @active_task.task }%>
+  <% else %>
+    <%= render partial: 'form' %>
+  <% end %>
+  <div class="divider my-10">Recent Task Logs</div>
+  <%= turbo_frame_tag "tasks_logs" do %>
+    <% @task_logs.each do | log | %>
+      <%= render partial: 'task', locals: {time_log: log }%>
+    <% end %>
+  <% end %>
+</div>

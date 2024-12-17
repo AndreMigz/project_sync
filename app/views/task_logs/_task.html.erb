@@ -1,0 +1,22 @@
+<div id="<%= dom_id(time_log) %>" class="container bg-base-300 px-5 py-4 my-5 rounded-md" >
+  <div class="w-full flex items-center justify-between">
+    <div class="flex items-center max-w-max">
+      <p class="text-md truncate"><%= time_log.task.name %></p>
+      <p class="text-sm ms-5 text-primary truncate">📂 <%= time_log.task.project.name %></p>
+    </div>
+    <div class="flex items-center max-w-max">
+      <div class="divider divider-horizontal"></div>
+      <p class="text-sm text-wrap"><%= time_log.start_time.strftime("%H:%M") %> - <%= time_log.end_date.strftime("%H:%M") %></p>
+      <div class="divider divider-horizontal"></div>
+      <p class="text-sm"><%= time_spent(time_log.start_time, time_log.end_date) %></p>
+      <div class="divider divider-horizontal"></div>
+      <%= button_to task_logs_path do %>
+        <i class="fa-solid fa-play"></i>
+      <% end %>
+      <div class="divider divider-horizontal"></div>
+      <%= button_to task_logs_path do %>
+        <i class="fa-solid fa-ellipsis-vertical"></i>
+      <% end %>
+    </div>
+  </div>
+</div>
