@@ -1,14 +1,17 @@
 <turbo-frame id="task_frame">
   <div class="container bg-base-300 px-5 py-4 rounded-md" data-controller="timer">
-    <div class="w-full flex items-center justify-between">
-      <div class="flex items-center max-w-max">
-        <p class="text-lg"><%= task.name %></p>
-        <p class="text-sm ms-5 text-primary">📂 <%= task.project.name %></p>
+    <div class="w-full flex max-[1040px]:flex-col items-center justify-between">
+      <p class="text-lg max-[1040px]:w-full"><%= task.name %></p>
+      <div class="divider min-[1041px]:hidden"></div>
+      <div class="flex items-center max-[1040px]:justify-between max-[1040px]:w-full min-[1041px]:max-w-max">
+        <p class="text-sm min-[1041px]:mx-5 text-primary">📂 <%= task.project.name %></p>
+        <div class="flex items-center max-w-max">
+          <div id="task-timer" class="text-lg font-semibold mr-5" data-timer-target="timer">
+            00:00:00
+          </div>
+          <%= link_to "Stop Timer", task_log_path(task, stop: true), data: { turbo_method: :patch }, class: "btn btn-error" %>
+        </div>
       </div>
-      <div id="task-timer" class="text-lg font-semibold mr-5" data-timer-target="timer">
-        00:00:00
-      </div>
-      <%= link_to "Stop Timer", task_log_path(task, stop: true), data: { turbo_method: :patch }, class: "btn btn-error" %>
     </div>
   </div>
 </turbo-frame>

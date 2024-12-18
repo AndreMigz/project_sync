@@ -1,14 +1,15 @@
 <turbo-frame id="task_frame">
   <div class="container bg-base-300 px-5 py-4 rounded-md">
-    <%= form_with model: Task.new, url: task_logs_path, class: "w-full flex items-center justify-between" do |f| %>
-      <div class="flex items-center max-w-max">
-        <%= f.text_field :name, class: "input input-bordered w-full max-w-xs input-md", autofocus: true, autocomplete: "name", placeholder: "What are you working on?", required: true %>
-        <%= f.select :project_id, Project.all.collect { |p| [p.name, p.id] }, { prompt: 'Select a project' }, class: "select select-bordered max-w-xs ms-4" %>
+    <%= form_with model: Task.new, url: task_logs_path, class: "w-full flex flex items-center max-[1040px]:flex-col items-center justify-between" do |f| %>
+      <%= f.text_field :name, class: "input input-bordered flex items-center w-full max-w-full input-md", autofocus: true, autocomplete: "name", placeholder: "What are you working on?", required: true %>
+      <div class="divider min-[1041px]:hidden"></div>
+      <div class="flex items-center justify-center max-[1040px]:justify-between max-[1040px]:w-full">
+        <%= f.select :project_id, Project.all.collect { |p| [p.name, p.id] }, { prompt: 'Select a project' }, class: "select select-bordered max-[1040px]:w-full min-[1041px]:max-w-xs min-[1041px]:ms-4" %>
+        <div id="task-timer" class="text-lg font-semibold mx-5">
+          00:00:00
+        </div>
+        <%= f.submit "Start Time", class: "btn btn-primary" %>
       </div>
-      <div id="task-timer" class="text-lg font-semibold">
-        00:00:00
-      </div>
-      <%= f.submit "Start Time", class: "btn btn-primary" %>
     <% end %>
   </div>
 </turbo-frame>

@@ -23,7 +23,7 @@
       <div class="sidebar-container bg-base-300 min-w-max shadow">
         <%= render "sidebar"%>
       </div>
-      <main class="main-content flex flex-wrap justify-center items-center">
+      <main class="main-content flex flex-wrap justify-center items-center overflow-x-auto">
         <%= yield %>
         <%= render "flash_message" %>
       </main>
