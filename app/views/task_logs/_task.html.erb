@@ -15,9 +15,17 @@
         <i class="fa-solid fa-play"></i>
       <% end %>
       <div class="divider divider-horizontal min-[1041px]:hidden"></div>
-      <%= button_to task_logs_path, class: "btn btn-ghost max-[1040px]:px-10" do %>
-        <i class="fa-solid fa-ellipsis-vertical"></i>
-      <% end %>
+      <div class="dropdown dropdown-end">
+        <div tabindex="0" role="button" class="btn btn-ghost max-[1040px]:px-10">
+          <i class="fa-solid fa-ellipsis-vertical"></i>
+        </div>
+        <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+          <li><a>Update</a></li>
+          <li>
+            <%= link_to "Delete", time_log, method: :delete, data: { turbo_method: :delete } %>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>

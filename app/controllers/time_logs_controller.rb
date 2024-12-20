@@ -1,5 +1,7 @@
 class TimeLogsController < ApplicationController
-  before_action :authenticate_user!, :set_task, :stop_active_time_log, only: %i[create]
+  before_action :authenticate_user!
+  before_action :set_task, :stop_active_time_log, only: %i[create]
+  before_action :set_time_log, only: %i[destroy]
 
   def create
     time_log = @task.time_logs.new(start_time: DateTime.now, status: :ongoing)
@@ -22,6 +24,14 @@ class TimeLogsController < ApplicationController
     end
   end
 
+  def destroy
+    respond_to do |format|
+      if @time_log.destroy
+        format.turbo_stream { render turbo_stream: turbo_stream.remove(@time_log) }
+      end
+    end
+  end
+
   private
 
   def stop_active_time_log
@@ -30,6 +40,12 @@ class TimeLogsController < ApplicationController
 
     active_log.update(end_date: DateTime.now, status: :done)
     @previous_log = active_log
+  end
+
+  def set_time_log
+    @time_log = TimeLog.find(params[:id])
+
+    redirect_to task_logs_path, notice: "Time log not found." unless @time_log
   end
 
   def set_task
