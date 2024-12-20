@@ -23,7 +23,7 @@ class TaskLogsController < ApplicationController
 
 
   def update
-    time_log = @task.time_logs.last
+    time_log = @task.active_time_log
     if params[:stop]
       time_log.update(end_date: DateTime.now, status: :done)
       respond_to do |format|

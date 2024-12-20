@@ -6,6 +6,10 @@ class Task < ApplicationRecord
 
   after_create :create_time_log
 
+  def active_time_log
+    time_logs.where(status: :ongoing).last
+  end
+
 
   private
 

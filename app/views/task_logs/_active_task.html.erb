@@ -1,5 +1,5 @@
 <turbo-frame id="task_frame">
-  <div class="container bg-base-300 px-5 py-4 rounded-md" data-controller="timer">
+  <div class="container bg-base-300 px-5 py-4 rounded-md" data-controller="timer" data-timer-start-time-value="<%= task.active_time_log.start_time %>">
     <div class="w-full flex max-[1040px]:flex-col items-center justify-between">
       <p class="text-lg max-[1040px]:w-full"><%= task.name %></p>
       <div class="divider min-[1041px]:hidden"></div>
