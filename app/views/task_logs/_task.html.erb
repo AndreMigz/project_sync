@@ -11,7 +11,7 @@
       <div class="divider divider-horizontal"></div>
       <p class="text-sm"><%= time_spent(time_log.start_time, time_log.end_date) %></p>
       <div class="divider divider-horizontal"></div>
-      <%= button_to task_logs_path, class: "btn btn-ghost max-[1040px]:px-10" do %>
+      <%= link_to time_logs_path(task_id: time_log.task_id), data: { turbo_method: :post }, class: "btn btn-ghost max-[1040px]:px-10" do %>
         <i class="fa-solid fa-play"></i>
       <% end %>
       <div class="divider divider-horizontal min-[1041px]:hidden"></div>

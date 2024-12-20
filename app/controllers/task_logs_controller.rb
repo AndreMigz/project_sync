@@ -21,7 +21,6 @@ class TaskLogsController < ApplicationController
     end
   end
 
-
   def update
     time_log = @task.active_time_log
     if params[:stop]

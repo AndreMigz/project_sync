@@ -20,4 +20,5 @@ Rails.application.routes.draw do
 
   resources :projects
   resources :task_logs, path: "logs"
+  resources :time_logs, path: "time-logs", only: %i[create]
 end
