@@ -9,8 +9,6 @@
   <% end %>
   <div class="divider my-10">Recent Task Logs</div>
   <%= turbo_frame_tag "tasks_logs" do %>
-    <% @task_logs.each do | log | %>
-      <%= render partial: 'task', locals: {time_log: log }%>
-    <% end %>
+    <%= render "content_loader" %>
   <% end %>
 </div>

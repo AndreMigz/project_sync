@@ -4,6 +4,15 @@ class TaskLogsController < ApplicationController
   def index
     @active_task = TimeLog.where(status: :ongoing).last
     @task_logs = TimeLog.where(status: :done).order(created_at: :desc)
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.replace("content_loader", partial: "task_logs/task_list", locals: { task_logs: @task_logs })
+        ]
+      end
+    end
   end
 
   def create
