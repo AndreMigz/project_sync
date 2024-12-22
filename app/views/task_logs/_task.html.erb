@@ -1,31 +1,36 @@
-<div id="<%= dom_id(time_log) %>" class="container bg-base-300 px-5 py-4 my-5 rounded-md" >
-  <div class="w-full flex max-[1040px]:flex-col items-center justify-between">
-    <div class="flex items-center max-[1040px]:justify-between max-[1040px]:w-full min-[1041px]:max-w-max">
-      <p class="text-md truncate"><%= time_log.task.name %></p>
-      <p class="text-sm ms-5 text-primary truncate">📂 <%= time_log.task.project.name %></p>
-    </div>
-    <div class="divider min-[1041px]:hidden"></div>
-    <div class="flex items-center max-[1040px]:justify-around max-[1040px]:w-full min-[1041px]:max-w-max">
-      <div class="divider divider-horizontal max-[1040px]:hidden"></div>
-      <p class="text-sm text-wrap"><%= time_log.start_time.strftime("%H:%M") %> - <%= time_log.end_date.strftime("%H:%M") %></p>
-      <div class="divider divider-horizontal"></div>
-      <p class="text-sm"><%= time_spent(time_log.start_time, time_log.end_date) %></p>
-      <div class="divider divider-horizontal"></div>
-      <%= link_to time_logs_path(task_id: time_log.task_id), data: { turbo_method: :post }, class: "btn btn-ghost max-[1040px]:px-10" do %>
-        <i class="fa-solid fa-play"></i>
-      <% end %>
-      <div class="divider divider-horizontal min-[1041px]:hidden"></div>
-      <div class="dropdown dropdown-end">
-        <div tabindex="0" role="button" class="btn btn-ghost max-[1040px]:px-10">
-          <i class="fa-solid fa-ellipsis-vertical"></i>
+<%= turbo_frame_tag dom_id(time_log) do %>
+  <div class="container bg-base-300 px-5 py-4 my-5 rounded-md" >
+    <div class="w-full flex max-[1040px]:flex-col items-center justify-between">
+      <div class="flex items-center max-[1040px]:justify-between max-[1040px]:w-full min-[1041px]:max-w-1/2">
+        <p class="text-md truncate"><%= time_log.task.name %></p>
+        <p class="text-sm ms-5 text-primary truncate">📂 <%= time_log.task.project.name %></p>
+      </div>
+      <div class="divider min-[1041px]:hidden"></div>
+      <div class="flex items-center max-[1040px]:justify-around max-[1040px]:w-full min-[1041px]:max-w-max">
+        <div class="divider divider-horizontal max-[1040px]:hidden"></div>
+        <p class="text-sm text-wrap"><%= time_log.start_time.strftime("%H:%M") %> - <%= time_log.end_date.strftime("%H:%M") %></p>
+        <div class="divider divider-horizontal"></div>
+        <p class="text-sm"><%= time_spent(time_log.start_time, time_log.end_date) %></p>
+        <div class="divider divider-horizontal"></div>
+        <%= link_to time_logs_path(task_id: time_log.task_id), data: { turbo_method: :post }, class: "btn btn-ghost max-[1040px]:px-10" do %>
+          <i class="fa-solid fa-play"></i>
+        <% end %>
+        <div class="divider divider-horizontal min-[1041px]:hidden"></div>
+        <div class="dropdown dropdown-end">
+          <div tabindex="0" role="button" class="btn btn-ghost max-[1040px]:px-10">
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+          </div>
+          <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+            <li>
+              <a onclick="timeLogModal<%= time_log.id %>.showModal()">Update</a>
+            </li>
+            <li>
+              <%= link_to "Delete", time_log, method: :delete, data: { turbo_method: :delete } %>
+            </li>
+          </ul>
         </div>
-        <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-          <li><a>Update</a></li>
-          <li>
-            <%= link_to "Delete", time_log, method: :delete, data: { turbo_method: :delete } %>
-          </li>
-        </ul>
       </div>
     </div>
   </div>
-</div>
+  <%= render partial: "task_logs/edit_modal", locals: { time_log: time_log }%>
+<% end %>

@@ -1,9 +1,4 @@
 <tr>
-  <th>
-    <label>
-      <input type="checkbox" class="checkbox" />
-    </label>
-  </th>
   <td>
     <div class="flex items-center gap-3">
       <div class="avatar">
@@ -26,7 +21,8 @@
     <div class="flex gap-x-2">
       <button class="btn btn-ghost btn-xs" onclick="formModal<%= project.id %>.showModal()">update</button>
       <%= render partial: "form_modal", locals: { project: project } %>
-      <%= button_to "delete", project, method: :delete, class: "btn btn-ghost btn-xs" %>
+      <button class="btn btn-ghost btn-xs" onclick="deleteProjectModal<%= project.id %>.showModal()">delete</button>
+      <%= render partial: "delete_confirmation_modal", locals: { project: project } %>
     </div>
   </td>
 </tr>

@@ -1,7 +1,7 @@
 class TimeLogsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_task, :stop_active_time_log, only: %i[create]
-  before_action :set_time_log, only: %i[destroy]
+  before_action :set_time_log, only: %i[update destroy]
 
   def create
     time_log = @task.time_logs.new(start_time: DateTime.now, status: :ongoing)
@@ -24,6 +24,21 @@ class TimeLogsController < ApplicationController
     end
   end
 
+  def update
+    task = Task.find_or_create_by(task_params)
+
+    respond_to do |format|
+      if @time_log.update(time_log_params.merge(task_id: task.id))
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.replace(@time_log, partial: "task_logs/task", locals: { time_log: @time_log })
+        }
+        format.html { redirect_to task_logs_path, notice: "Task updated successfully." }
+      else
+        format.html { redirect_to task_logs_path, notice: "Failed to update task.", status: :unprocessable_entity }
+      end
+    end
+  end
+
   def destroy
     respond_to do |format|
       if @time_log.destroy
@@ -33,6 +48,14 @@ class TimeLogsController < ApplicationController
   end
 
   private
+
+  def time_log_params
+    params.require(:time_log).permit(:start_time, :end_date)
+  end
+
+  def task_params
+    params.require(:time_log).require(:task).permit(:name, :project_id)
+  end
 
   def stop_active_time_log
     active_log = TimeLog.where(status: :ongoing).last

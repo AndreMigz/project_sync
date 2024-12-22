@@ -19,16 +19,26 @@ class TaskLogsController < ApplicationController
     task = Task.new(task_params)
 
     respond_to do |format|
-      if task.save
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.replace("task_frame", partial: "active_task", locals: { task: task })
+      Task.transaction do
+        if task.save && task.time_logs.build(start_time: DateTime.now, status: :ongoing).save
+          format.turbo_stream do
+            render turbo_stream: turbo_stream.replace(
+              "task_frame",
+              partial: "active_task",
+              locals: { task: task }
+            )
+          end
+          format.html { redirect_to task_logs_path, notice: "Task created successfully." }
+        else
+          format.html { redirect_to task_logs_path, alert: "Failed to create task.", status: :unprocessable_entity }
+          raise ActiveRecord::Rollback
         end
-        format.html { redirect_to task_logs_path, notice: "Task created successfully." }
-      else
-        format.html { redirect_to task_logs_path, notice: "Failed to create task.", status: :unprocessable_entity }
       end
+    rescue ActiveRecord::RecordInvalid => e
+      format.html { redirect_to task_logs_path, alert: "An error occurred: #{e.message}", status: :unprocessable_entity }
     end
   end
+
 
   def update
     time_log = @task.active_time_log

@@ -1,0 +1,31 @@
+<dialog id="timeLogModal<%= time_log.id %>" class="modal">
+  <div class="modal-box">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    </form>
+    <h3 class="text-lg font-bold">Edit Task Log</h3>
+    <%= form_with(model: time_log, class: "w-full mt-5") do |f| %>
+      <%= f.fields_for :task do |task| %>
+        <div class="field w-full px-0 mt-2">
+          <%= task.label :name %>
+          <%= task.text_field :name, value: time_log.task.name, class: "input input-bordered w-full" %>
+        </div>
+        <div class="field w-full px-0 mt-2">
+          <%= task.label :project_id %>
+          <%= task.select :project_id, Project.all.collect { |p| [p.name, p.id] }, { prompt: 'Select a project', selected: time_log.task&.project_id }, class: "select select-bordered w-full" %>
+        </div>
+      <% end %>
+      <div class="field w-full px-0 mt-2">
+        <%= f.label :start_time, "Start" %>
+        <%= f.datetime_field :start_time, class: "input input-bordered w-full" %>
+      </div>
+      <div class="field w-full px-0 mt-2">
+        <%= f.label :end_date, "End" %>
+        <%= f.datetime_field :end_date, class: "input input-bordered w-full" %>
+      </div>
+      <div class="action text-sm mt-2">
+        <%= f.submit "Save", class: "btn btn-primary float-right" %>
+      </div>
+    <% end %>
+  </div>
+</dialog>
