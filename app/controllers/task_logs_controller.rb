@@ -3,15 +3,11 @@ class TaskLogsController < ApplicationController
   before_action :set_task, only: [ :update ]
   def index
     @active_task = TimeLog.where(status: :ongoing).last
-    @task_logs = TimeLog.where(status: :done).order(created_at: :desc)
+    @pagy, @task_logs = pagy(TimeLog.where(status: :done).order(created_at: :desc), limit: 5)
 
     respond_to do |format|
       format.html
-      format.turbo_stream do
-        render turbo_stream: [
-          turbo_stream.replace("content_loader", partial: "task_logs/task_list", locals: { task_logs: @task_logs })
-        ]
-      end
+      format.turbo_stream
     end
   end
 

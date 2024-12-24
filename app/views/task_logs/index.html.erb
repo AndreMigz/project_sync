@@ -9,6 +9,9 @@
   <% end %>
   <div class="divider my-10">Recent Task Logs</div>
   <%= turbo_frame_tag "tasks_logs" do %>
-    <%= render "content_loader" %>
+    <%= render partial: "task_list", locals: { task_logs: @task_logs } %>
   <% end %>
+  <div id="load_more_button" class="w-full flex justify-center">
+    <%= button_to "Load More", pagy_url_for(@pagy, @pagy.next), data: { turbo_method: :post }, class: "btn btn-primary"%>
+  </div>
 </div>

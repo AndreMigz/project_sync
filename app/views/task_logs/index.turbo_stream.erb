@@ -1,0 +1,8 @@
+<%= turbo_stream.append "tasks_logs" do %>
+  <%= render partial: "task_logs/task_list", locals: { task_logs: @task_logs } %>
+<% end %>
+<%= turbo_stream.update "load_more_button" do %>
+  <% unless @pagy.next.nil? %>
+    <%= button_to "Load More", pagy_url_for(@pagy, @pagy.next), data: { turbo_method: :post }, class: "btn btn-primary"%>
+  <% end %>
+<% end %>

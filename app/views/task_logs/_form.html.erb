@@ -1,6 +1,6 @@
 <turbo-frame id="task_frame">
   <div class="container bg-base-300 px-5 py-4 rounded-md">
-    <%= form_with model: Task.new, url: task_logs_path, class: "w-full flex flex items-center max-[1040px]:flex-col items-center justify-between" do |f| %>
+    <%= form_with model: Task.new, url: new_entry_task_logs_path, class: "w-full flex flex items-center max-[1040px]:flex-col items-center justify-between" do |f| %>
       <%= f.text_field :name, class: "input input-bordered flex items-center w-full max-w-full input-md", autofocus: true, autocomplete: "name", placeholder: "What are you working on?", required: true %>
       <div class="divider min-[1041px]:hidden"></div>
       <div class="flex items-center justify-center max-[1040px]:justify-between max-[1040px]:w-full">

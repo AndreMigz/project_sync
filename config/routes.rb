@@ -19,6 +19,11 @@ Rails.application.routes.draw do
   root "dashboard#index"
 
   resources :projects
-  resources :task_logs, path: "logs"
+  resources :task_logs, path: "logs" do
+    collection do
+      post :index
+      post :new_entry, action: :create
+    end
+  end
   resources :time_logs, path: "time-logs", only: [ :create, :destroy, :update ]
 end
