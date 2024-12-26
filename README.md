@@ -1,4 +1,5 @@
-# Project:Sync ⏲️ 📁
+# Project:Sync ⏲️ 📁 
+[![CI](https://github.com/AndreMigz/project_sync/actions/workflows/ci.yml/badge.svg)](https://github.com/AndreMigz/project_sync/actions/workflows/ci.yml)
 - Time Tracking & Project Manangement Web App
 
 ## Features 🚀
@@ -6,6 +7,10 @@
 - **Project Management**: Organize and manage tasks across multiple projects.
 - **User Authentication**: Secure login and signup functionality.
 - **Analytics Dashboard**: Gain insights with detailed reports and charts. (Under development 🚧)
+
+## Preview 👀
+![image](https://github.com/user-attachments/assets/a4badef8-970a-4fed-96a4-d0ab107e22ea)
+
 
 ## System Requirements
 * **Ruby version**: 3.3.5
