@@ -1,11 +1,17 @@
 <div class="sidebar-container h-full w-full relative">
-  <div class="user-info-wrapper flex items-center justify-start gap-2 px-5 py-3">
-    <%= image_tag("https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5", class: "avatar size-10 rounded shadow-md") %>
+  <div class="user-info-wrapper relative flex items-center justify-start gap-2 px-5 py-3">
+    <% if current_user.profile_image.attached? %>
+      <%= image_tag current_user.profile_image, class: "avatar size-10 rounded shadow-md", alt: "User Profile Image" %>
+    <% else %>
+      <img src="https://placehold.jp/40x40.png" class="avatar size-10 rounded shadow-md" alt="Project Placeholder" />
+    <% end %>
     <div class="name-wrapper grow">
-      <p class="font-semibold text-sm">John Doe</p>
-      <p class="text-xs text-neutral-content">doe@example.com</p>
+      <p class="font-semibold text-sm"><%= current_user.fullname %></p>
+      <p class="text-xs text-neutral-content"><%= current_user.email %></p>
     </div>
-    <i class="fa-solid fa-angle-down"></i>
+    <div class="collapse-button btn btn-square btn-primary btn-xs absolute -right-3 -bottom-3 rounded shadow">
+      <i class="fa-solid fa-chevron-left"></i>
+    </div>
   </div>
   <div class="menu-container px-5 py-3">
     <p class="ml-2 text-neutral">Timer</p>
@@ -43,13 +49,13 @@
     </button>
   </div>
   <div class="extra-options-container w-full absolute bottom-0 px-5 py-3">
-    <button class="menu-option">
+    <%= link_to edit_user_registration_path, class: "menu-option" do %>
       <i class="fa-solid fa-gear"></i>
       <p class="font-semibold">Settings</p>
-    </button>
-    <button class="menu-option">
-      <i class="fa-regular fa-circle-question"></i>
-      <p class="font-semibold">Help Center</p>
-    </button>
+    <% end %>
+    <%= link_to destroy_user_session_path, data: { turbo_method: :delete },  class: "menu-option" do %>
+      <i class="fa-solid fa-right-from-bracket"></i>
+      <p class="font-semibold">Logout</p>
+    <% end %>
   </div>
 </div>
