@@ -19,8 +19,8 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
   <body>
-    <div class="w-screen h-screen grid grid-cols-[auto,1fr]">
-      <div class="sidebar-container bg-base-300 min-w-max shadow">
+    <div id="mainContainer" class="w-screen h-screen grid grid-cols-[auto,1fr]">
+      <div class="sidebar-container bg-base-300 shadow">
         <%= render "sidebar"%>
       </div>
       <main class="main-content flex flex-wrap justify-center items-center overflow-x-auto">

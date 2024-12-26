@@ -1,61 +1,61 @@
-<div class="sidebar-container h-full w-full relative">
+<div class="sidebar-container h-full w-full relative" data-controller="sidebar">
   <div class="user-info-wrapper relative flex items-center justify-start gap-2 px-5 py-3">
     <% if current_user.profile_image.attached? %>
       <%= image_tag current_user.profile_image, class: "avatar size-10 rounded shadow-md", alt: "User Profile Image" %>
     <% else %>
       <img src="https://placehold.jp/40x40.png" class="avatar size-10 rounded shadow-md" alt="Project Placeholder" />
     <% end %>
-    <div class="name-wrapper grow">
+    <div class="name-wrapper string grow ">
       <p class="font-semibold text-sm"><%= current_user.fullname %></p>
       <p class="text-xs text-neutral-content"><%= current_user.email %></p>
     </div>
-    <div class="collapse-button btn btn-square btn-primary btn-xs absolute -right-3 -bottom-3 rounded shadow">
+    <div class="collapse-button btn btn-square btn-primary btn-xs absolute -right-3 -bottom-3 rounded shadow" data-action="click->sidebar#toggleSideNav">
       <i class="fa-solid fa-chevron-left"></i>
     </div>
   </div>
   <div class="menu-container px-5 py-3">
-    <p class="ml-2 text-neutral">Timer</p>
+    <p class="ml-2 text-neutral string">Timer</p>
     <%= link_to task_logs_path, class: "menu-option" do %>
       <i class="fa-regular fa-clock"></i>
-      <p class="font-semibold">Timer</p>
+      <p class="font-semibold string ">Timer</p>
     <% end %>
     <div class="divider my-1"></div>
-    <p class="ml-2 text-neutral">Analyze</p>
+    <p class="ml-2 text-neutral string">Analyze</p>
     <button class="menu-option">
       <i class="fa-solid fa-chart-column"></i>
-      <p class="font-semibold">Reports</p>
+      <p class="font-semibold string">Reports</p>
     </button>
     <button class="menu-option">
       <i class="fa-solid fa-chart-pie"></i>
-      <p class="font-semibold">Analytics</p>
+      <p class="font-semibold string">Analytics</p>
     </button>
     <button class="menu-option">
       <i class="fa-solid fa-rocket"></i>
-      <p class="font-semibold">Insights</p>
+      <p class="font-semibold string">Insights</p>
     </button>
     <div class="divider my-1"></div>
-    <p class="ml-2 text-neutral">Management</p>
+    <p class="ml-2 text-neutral string">Management</p>
     <%= link_to projects_path, class: "menu-option" do %>
       <i class="fa-solid fa-chart-column"></i>
-      <p class="font-semibold">Projects</p>
+      <p class="font-semibold string">Projects</p>
     <% end %>
     <button class="menu-option">
       <i class="fa-solid fa-chart-pie"></i>
-      <p class="font-semibold">Teams</p>
+      <p class="font-semibold string">Teams</p>
     </button>
     <button class="menu-option">
       <i class="fa-solid fa-rocket"></i>
-      <p class="font-semibold">Invoices</p>
+      <p class="font-semibold string">Invoices</p>
     </button>
   </div>
   <div class="extra-options-container w-full absolute bottom-0 px-5 py-3">
     <%= link_to edit_user_registration_path, class: "menu-option" do %>
       <i class="fa-solid fa-gear"></i>
-      <p class="font-semibold">Settings</p>
+      <p class="font-semibold string">Settings</p>
     <% end %>
     <%= link_to destroy_user_session_path, data: { turbo_method: :delete },  class: "menu-option" do %>
       <i class="fa-solid fa-right-from-bracket"></i>
-      <p class="font-semibold">Logout</p>
+      <p class="font-semibold string">Logout</p>
     <% end %>
   </div>
 </div>
