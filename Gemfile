@@ -65,7 +65,7 @@ group :test do
   gem "rspec-rails"
 end
 
-gem "tailwindcss-rails", "~> 3.0"
+gem "tailwindcss-rails", "~> 3.1"
 gem "faker", "~> 3.5"
 gem "devise", "~> 4.9"
 
