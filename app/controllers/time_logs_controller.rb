@@ -4,7 +4,7 @@ class TimeLogsController < ApplicationController
   before_action :set_time_log, only: %i[update destroy]
 
   def create
-    time_log = @task.time_logs.new(start_time: DateTime.now, status: :ongoing)
+    time_log = @task.time_logs.new(start_time: DateTime.now, status: :ongoing, user: current_user)
     respond_to do |format|
       if time_log.save
         turbo_streams = [

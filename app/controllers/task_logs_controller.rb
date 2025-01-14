@@ -2,8 +2,8 @@ class TaskLogsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_task, only: [ :update ]
   def index
-    @active_task = TimeLog.where(status: :ongoing).last
-    @pagy, @task_logs = pagy(TimeLog.where(status: :done).order(created_at: :desc), limit: 5)
+    @active_task = current_user.time_logs.where(status: :ongoing).last
+    @pagy, @task_logs = pagy(current_user.time_logs.where(status: :done).order(created_at: :desc), limit: 5)
 
     respond_to do |format|
       format.html
@@ -12,11 +12,11 @@ class TaskLogsController < ApplicationController
   end
 
   def create
-    task = Task.new(task_params)
+    task = current_user.tasks.new(task_params)
 
     respond_to do |format|
       Task.transaction do
-        if task.save && task.time_logs.build(start_time: DateTime.now, status: :ongoing).save
+        if task.save && task.time_logs.build(start_time: DateTime.now, status: :ongoing, user: current_user).save
           format.turbo_stream do
             render turbo_stream: turbo_stream.replace(
               "task_frame",

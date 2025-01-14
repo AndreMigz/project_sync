@@ -2,11 +2,11 @@ class ProjectsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_project, only: [ :update, :destroy ]
   def index
-    @projects = Project.all
+    @projects = current_user.projects.all
   end
 
   def create
-    project = Project.new(project_params)
+    project = current_user.project.new(project_params)
 
     if project.save
       redirect_to projects_path, notice: "Project added."
