@@ -70,3 +70,7 @@ gem "faker", "~> 3.5"
 gem "devise", "~> 4.9"
 
 gem "pagy", "~> 9.3"
+
+gem "chartkick", "~> 5.1"
+
+gem "groupdate", "~> 6.5"
